@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "types":[
+      "node"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,7 +24,9 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "src/types",
+    "webpack.config.ts"
   ],
   "exclude": [
     "node_modules/**/*"

@@ -1,0 +1,9 @@
+$special-white : hsla(0,0%,100%,.8);
+
+.nexo-navBar {
+    margin: 0;
+    padding: 20px 20px 0 20px;
+    background-color: $special-white;
+    height: 64px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}

@@ -1,7 +1,9 @@
-import './App.css';
 import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import {CoinbaseWalletSDK} from '@coinbase/wallet-sdk';
+import {LandingPage} from './pages'
+import { Navbar } from './components';
+import './assets/styles/global.scss'
 
 const providerOptions = {
     coinbasewallet:{
@@ -27,6 +29,7 @@ function App() {
           hover:'yellow',
           border:'white'
         }
+        
       });
       const web3ModalInstance = await web3Modal.connect();
       const web3ModalProvider = new ethers.providers.Web3Provider(web3ModalInstance);
@@ -39,11 +42,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={connectWallet}>Open Sesamesz</button>
-      </header>
-    </div>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <button onClick={connectWallet}>Open Sesamesz</button>
+    //   </header>
+    // </div>
+    <>
+    <Navbar/>
+    <LandingPage/>
+    </>
   );
 }
 

@@ -1,0 +1,52 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+$breakpoint-icon: 375px;
+
+@mixin svg-strokes {
+  stroke-dashoffset: 210;
+  stroke-dasharray: 210;
+  animation: draw 10s forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill-in {
+  to {
+    fill-opacity: 1;
+  }
+}
+
+.nexo-icon {
+  width: 300px;
+  height: 300px;
+  padding-top: 100px;
+  
+}
+
+.nexo-icon path {
+  @include svg-strokes;
+}
+
+.nexo-icon polygon {
+  @include svg-strokes;
+}
+
+.nexo-icon g {
+  fill-opacity: 0;
+  animation: fill-in 2s 2s forwards;
+}
+
+
+.landing-pg-container {
+   text-align: center;
+}
+
+.icon-container {
+  
+  
+}
+
