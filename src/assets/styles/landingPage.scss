@@ -1,12 +1,25 @@
 $font-stack: Helvetica, sans-serif;
-$primary-color: #333;
+$text-color: #333;
 $breakpoint-icon: 375px;
+
 
 @mixin svg-strokes {
   stroke-dashoffset: 210;
   stroke-dasharray: 210;
   animation: draw 10s forwards;
 }
+
+@mixin text-nexo-gradient($secondGradient) {
+  background: -webkit-radial-gradient(circle, rgb(60, 169, 229),$secondGradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin left-text-animation {
+  animation: 1.5s ease-out 0s 1 slideInFromLeft;
+}
+
 
 @keyframes draw {
   to {
@@ -45,8 +58,37 @@ $breakpoint-icon: 375px;
    text-align: center;
 }
 
-.icon-container {
-  
-  
+// .icon-container {}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.main-text {
+  @include text-nexo-gradient($secondGradient:rgb(26, 65, 153));
+  @include left-text-animation;
+  font-size: xxx-large;
+}
+
+.connect-btn {
+  @include text-nexo-gradient($secondGradient:rgb(26, 65, 153));
+  @include left-text-animation;
+  width: 350px;
+  font-weight: 500;
+  font-size: x-large;
+  height: 60px;
+  border-radius: 25px;
+  border: 2px solid rgb(12, 148, 246);
+  box-shadow: 0 5px 10px 0 rgba(1, 128, 247, 0.598);
+
+  &:hover {
+    @include text-nexo-gradient($secondGradient:rgb(4, 16, 65));
+    box-shadow: 0 10px 20px 0 rgba(1, 128, 247, 0.598);
+  }
 }
 
