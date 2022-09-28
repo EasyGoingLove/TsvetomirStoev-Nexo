@@ -1,5 +1,6 @@
 import '../assets/styles/landingPage.scss'
 import { svgIcons } from '../assets/svgs'
+import { ConnectorBtn } from '../components'
 
 const NexoIcon = svgIcons.nexoIcon
 
@@ -13,7 +14,7 @@ const LandingPage = () => {
                     The right place for your crypto adventures
                 </h2>
             </div>
-            <button className='connect-btn'>Connect with your Wallet</button>
+            <ConnectorBtn/>
         </div>
     )
 }
@@ -21,6 +22,3 @@ const LandingPage = () => {
 LandingPage.propTypes = {}
 
 export default LandingPage
-
-
-

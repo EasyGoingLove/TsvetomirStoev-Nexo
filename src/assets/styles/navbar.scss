@@ -7,3 +7,28 @@ $special-white : hsla(0,0%,100%,.8);
     height: 64px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
+
+.nav-user-container {
+    display: flex;
+    box-shadow: 2px black;
+    box-shadow: 0px 3px rgb(40, 83, 195);
+    margin-right: 30px;
+}
+
+.nav-wallet-address {
+    margin-top: 6px;
+    margin-right: 30px;
+    margin-left: 12px;
+    color: rgb(40, 83, 195);
+    font-weight: 600;
+}
+
+.nav-sign-in-btn {
+    background: transparent;
+    border: none;
+    border-radius: 15px;
+
+    &:hover {
+        background: rgba(40, 84, 195, 0.09);
+      }
+}

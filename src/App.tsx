@@ -1,56 +1,24 @@
-import { ethers } from 'ethers';
-import Web3Modal from 'web3modal';
-import {CoinbaseWalletSDK} from '@coinbase/wallet-sdk';
-import {LandingPage} from './pages'
+import { Display } from './pages';
 import { Navbar } from './components';
-import './assets/styles/global.scss'
+import './assets/styles/global.scss';
+import { WalletProvider } from './context';
+import { Web3ReactProvider } from '@web3-react/core';
+import Web3 from 'web3'
 
-const providerOptions = {
-    coinbasewallet:{
-      package: CoinbaseWalletSDK,
-      options:{
-        appName : "Nexify"
-      }
-    },
+
+const getLibrary = (provider: any) => {
+  return new Web3(provider)
 }
 
-function App() {
-
-  async function connectWallet() {
-    try {
-      
-      let web3Modal = new Web3Modal({
-        cacheProvider: false,
-        providerOptions,
-        theme : {
-          background:'red',
-          main:'blue',
-          secondary:'green',
-          hover:'yellow',
-          border:'white'
-        }
-        
-      });
-      const web3ModalInstance = await web3Modal.connect();
-      const web3ModalProvider = new ethers.providers.Web3Provider(web3ModalInstance);
-      console.log(web3ModalProvider);
-
-    } catch (error) {
-      console.log(error);
-
-    }
-  }
+const  App = () =>{
 
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <button onClick={connectWallet}>Open Sesamesz</button>
-    //   </header>
-    // </div>
-    <>
-    <Navbar/>
-    <LandingPage/>
-    </>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <WalletProvider>
+        <Navbar />
+        <Display />
+      </WalletProvider>
+    </Web3ReactProvider>
   );
 }
 
