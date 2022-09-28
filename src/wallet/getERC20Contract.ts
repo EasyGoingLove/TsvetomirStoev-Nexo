@@ -1,9 +1,8 @@
 import ABI from './assets/erc20.abi.json'
 
-export const getERC20Contract = (tokenAddress:string, web3:any) =>{
-    
+export const getERC20Contract =  (tokenAddress:string, web3:any) =>{
     return web3
-    ? new web3.eth.Contract(ABI,tokenAddress ,{
+    ?  new web3.eth.Contract(ABI,tokenAddress ,{
         from: web3.eth.defaultAccount,
     })
     : null

@@ -3,13 +3,15 @@ import { ReactComponent as NexoLogo } from './nexo-logo.svg'
 import { ReactComponent as SignOut } from './sign-out.svg'
 import { ReactComponent as UserIcon } from './user.svg'
 import { ReactComponent as MetamaskIcon } from './metamask-icon.svg'
+import { ReactComponent as EthereumIcon } from './ethereum-icon.svg'
 
 const svgIcons = {
     nexoIcon: NexoIcon,
     nexoLogo: NexoLogo,
     signOut: SignOut,
     userIcon: UserIcon,
-    metamaskIcon:MetamaskIcon
+    metamaskIcon:MetamaskIcon,
+    ethereumIcon:EthereumIcon,
 }
 
 export default svgIcons
