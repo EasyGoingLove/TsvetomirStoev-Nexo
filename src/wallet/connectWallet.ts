@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
-
+import {defaultUserValues} from '../context/WalletContext'
 import tokens from "../assets/wallet/tokens.json";
 
 const providerOptions = {
@@ -32,9 +32,9 @@ export const connectWallet = async () => {
     const address = await signer.getAddress();
     const ethBalance = ethers.utils.formatEther(await web3ModalProvider.getBalance(address))
 
-    console.log(address);
-    console.log('Network', network);
-    console.log('Ethereum', ethBalance);
+    if(network.chainId !== 1){
+        return defaultUserValues
+    }
 
     const nexoToken = await new ethers.Contract(tokens[0].address, ['function balanceOf(address) external view returns (uint256)'], signer);
     const nexoBalance = await nexoToken.functions.balanceOf(address);

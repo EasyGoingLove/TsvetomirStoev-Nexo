@@ -1,23 +1,26 @@
-import { WalletContext } from '../context'
+import { WalletContext ,defaultUserValues} from '../context'
 import { useContext } from 'react'
 import LandingPage from './LandingPage'
 import UserPage from './UserPage'
 
 const Display = () => {
-    window.ethereum.on('accountsChanged', function (acc:any) {
-        // Time to reload your interface with accounts[0]!
-        console.log('acc change',acc);
-        
-      });
-    
-      window.ethereum.on('networkChanged', function () {
-        // Time to reload your interface with accounts[0]!
-        console.log('net change');
-        
-      });
-    const { userData } = useContext(WalletContext)
+
+    const { userData  , updateUserData} = useContext(WalletContext)
     const userAdders = userData?.address
+
+
+    window.ethereum.on('accountsChanged', function (wallet:string[]) {
+        if(!wallet.length) {
+            updateUserData(defaultUserValues)   
+        } 
+      });
     
+      window.ethereum.on('networkChanged', function (network:any) {
+        console.log('net change',network);  
+        if(network !== 1){
+            alert('Please select MAINNET from your wallet netwwork')
+        }
+      });
 
     return (<>{userAdders ? <UserPage /> : <LandingPage />}</>)
 }

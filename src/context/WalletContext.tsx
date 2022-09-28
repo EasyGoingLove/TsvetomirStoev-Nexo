@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const defaultValues: IUser = {
+export const defaultUserValues: IUser = {
   address: null,
   network: null,
   ethereumBalance: null,
@@ -18,7 +18,7 @@ const WalletContext = createContext<any>(null);
 
 export const WalletProvider: React.FC<Props> = ({ children }) => {
 
-  const [userData, setUserData] = useState(defaultValues)
+  const [userData, setUserData] = useState(defaultUserValues)
 
   const updateUserData = (data: IUser) => {
     setUserData(data)
