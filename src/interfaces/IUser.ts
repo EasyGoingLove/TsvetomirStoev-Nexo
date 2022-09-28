@@ -7,5 +7,6 @@ interface IUser {
 
     nexoBalance: number | null
     
+    listOfTokens?:any
 }
 export default IUser

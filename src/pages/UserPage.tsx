@@ -2,23 +2,16 @@ import '../assets/styles/userPage.scss'
 import { svgIcons } from '../assets/svgs'
 import { WalletContext } from '../context'
 import { useContext } from 'react'
-import { useWeb3React } from '@web3-react/core'
-import useBalance from "../hooks/useBalance";
-import Mainnet from '../wallet/assets/mainnet.json'
 
 const MetamaskIcon = svgIcons.metamaskIcon
 const EthereumIcon = svgIcons.ethereumIcon
 const NexoLogo = svgIcons.nexoIcon
 
+
 const UserPage = () => {
 
     const { userData  } = useContext(WalletContext)
-    const { account, library, active } = useWeb3React()
 
-   
-    
-    useBalance(Mainnet);
-    console.log(library.eth.defaultAccount, ' ssssssss');
     return (
         <div className="userPage-wrapper">
             <div className="card">

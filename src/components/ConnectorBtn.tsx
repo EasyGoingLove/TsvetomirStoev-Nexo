@@ -1,22 +1,19 @@
-import { useWeb3React } from "@web3-react/core";
-import useBalance from "../hooks/useBalance";
-import { injected } from "../wallet";
-import Mainnet from '../wallet/assets/mainnet.json'
+
+import { WalletContext } from "../context";
+import { useContext } from 'react'
+
+import {connectWallet} from '../wallet/connectWallet'
 
 const ConnectorBtn = () => {
+  const { updateUserData ,userData} = useContext(WalletContext)
 
-  const { activate } = useWeb3React()
-
-  const connect = async () => {
-    try {
-      await activate(injected)
-    } catch (err) {
-      console.log(err);
-    }
+  const connect = async() => {
+    const initialWalletData = await connectWallet()
+    updateUserData(initialWalletData)
+    console.log(userData);
+    
   }
-
-  useBalance(Mainnet)
-
+ 
   return <button onClick={connect} className='connect-btn'>Connect with your Wallets</button>
 };
 

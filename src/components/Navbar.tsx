@@ -1,5 +1,4 @@
 import '../assets/styles/navbar.scss'
-import { useWeb3React } from "@web3-react/core";
 import { svgIcons } from '../assets/svgs'
 import { WalletContext } from '../context'
 import { useContext, useState, ReactPropTypes } from 'react'
