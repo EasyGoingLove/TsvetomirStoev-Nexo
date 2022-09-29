@@ -91,12 +91,28 @@ export const getTokenContract = async (tokenAddress: string, signer: ethers.Sign
 }
 
 export const getTokenBalance = async (tokenAddress: string, signer: ethers.Signer | ethers.providers.Provider | undefined, walletAddress: string) => {
+  try {
   const tokenContract = await getTokenContract(tokenAddress, signer);
   const tokenDecimals = await tokenContract.functions.decimals();
   const tokenBalance = await tokenContract.functions.balanceOf(walletAddress);
   const formatedTokenBalance = ethers.utils.formatUnits(tokenBalance[0], tokenDecimals[0])
   
   return formatedTokenBalance 
+  } catch (error) {
+    return -1
+  }
+  
+}
+
+export const getTokenName = async (tokenAddress: string, signer: ethers.Signer | ethers.providers.Provider | undefined) => {
+  try {
+  const tokenContract = await getTokenContract(tokenAddress, signer);
+  const tokenName = await tokenContract.functions.name();
+  return tokenName 
+  } catch (error) {
+    return -1
+  }
+  
 }
 
 export const getTokenData = async (tokenAddress: string, signer: ethers.Signer | ethers.providers.Provider | undefined) => {
