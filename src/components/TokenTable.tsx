@@ -1,28 +1,36 @@
 import '../assets/styles/tokenTable.scss'
 
+import '../assets/styles/additionalinfo.scss'
+import { svgIcons } from '../assets/svgs'
+import { WalletContext , defaultTokenModalValues } from '../context'
+import { useContext } from 'react'
 
 
 const TokenTable = () => {
+
+    const { tokenModal ,updateTokenModal } = useContext(WalletContext)
+
+
+    if(!tokenModal.switchModal) {
+        return null
+    }
+
     return (
-        <div className="token-modal" >
+        <div className="token-modal" onClick={()=> updateTokenModal(defaultTokenModalValues)}>
             <div className="token-modal-content">
                 <table id="customers">
                     <tbody>
                         <tr>
                             <th>Token Symbol</th>
-                            <th>Contact</th>
+                            <th>{tokenModal.tokenSymbol}</th>
                         </tr>
                         <tr>
                             <th>Decimals</th>
-                            <th>Maria Anders</th>
+                            <th>{tokenModal.decimals}</th>
                         </tr>
                         <tr>
                             <th>Total Supply</th>
-                            <th>Maria Anders</th>
-                        </tr>
-                        <tr>
-                            <th>Contract Address</th>
-                            <th>Maria Anders</th>
+                            <th>{tokenModal.totalSupply}</th>
                         </tr>
                     </tbody>
                 </table>

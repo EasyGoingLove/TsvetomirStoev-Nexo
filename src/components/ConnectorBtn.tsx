@@ -2,7 +2,7 @@
 import { WalletContext } from "../context";
 import { useContext } from 'react'
 
-import {connectWallet} from '../helpers/connectWallet'
+import {connectWallet} from '../helpers/walletFunction'
 
 const ConnectorBtn = () => {
   const { updateUserData ,userData} = useContext(WalletContext)

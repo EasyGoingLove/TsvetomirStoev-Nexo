@@ -3,6 +3,8 @@ interface IUser {
     
     network: number | null
 
+    signer: any
+
     ethereumBalance: number |null
 
     nexoBalance: number | null

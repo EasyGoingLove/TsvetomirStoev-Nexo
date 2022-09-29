@@ -10,7 +10,7 @@ const SmallNexoLogo = svgIcons.smallNexoIcon
 
 const AdditionalInfo = () => {
 
-    const { userData  } = useContext(WalletContext)
+    const { tokenModal  } = useContext(WalletContext)
 
     return (
             <div className="adt-info-card">

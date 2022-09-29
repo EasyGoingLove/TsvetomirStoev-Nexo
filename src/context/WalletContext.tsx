@@ -10,14 +10,18 @@ export const defaultUserValues: IUser = {
   address: null,
   network: null,
   ethereumBalance: null,
-  nexoBalance: null
+  nexoBalance: null,
+  signer: null,
+}
+export interface ITokenModal extends  IToken {
+   switchModal:boolean
 }
 
-export const defaultTokenModalValues: IToken = {
+export const defaultTokenModalValues: ITokenModal = {
+  switchModal:false,
   tokenSymbol: null,
   decimals: null,
   totalSupply: null,
-  contractAddress: null
 }
 
 const WalletContext = createContext<any>(null);
@@ -33,12 +37,12 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
     setUserData(data)
   }
 
-  const updatetokenModal = (data: IToken) => {
+  const updateTokenModal = (data: ITokenModal) => {
     setTokenModal(data)
   }
   
   return (
-    <WalletContext.Provider value={{ userData, updateUserData ,tokenModal , updatetokenModal}}>
+    <WalletContext.Provider value={{ userData, updateUserData ,tokenModal , updateTokenModal}}>
       {children}
     </WalletContext.Provider>
   )

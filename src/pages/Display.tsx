@@ -2,7 +2,8 @@ import { WalletContext, defaultUserValues } from '../context'
 import { useContext } from 'react'
 import LandingPage from './LandingPage'
 import UserPage from './UserPage'
-import { getWalletData } from '../helpers/getWalletData'
+
+import {getWalletnData} from '../helpers/walletFunction'
 
 const Display = () => {
 
@@ -14,8 +15,9 @@ const Display = () => {
         if (!wallet.length) {
             updateUserData(defaultUserValues)
         } else {
-            const newWalletsData = await getWalletData();
-            updateUserData(newWalletsData)
+            const newWalletData :any = await getWalletnData();
+            
+            updateUserData(newWalletData)
         }
     });
 
