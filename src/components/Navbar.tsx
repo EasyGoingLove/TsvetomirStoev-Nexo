@@ -2,6 +2,7 @@ import '../assets/styles/navbar.scss'
 import { svgIcons } from '../assets/svgs'
 import { WalletContext } from '../context'
 import { useContext, useState, ReactPropTypes } from 'react'
+import { IUser } from '../interfaces'
 
 
 const NexoLogo = svgIcons.nexoLogo
@@ -13,7 +14,8 @@ interface IModalProps {
     modalClick: (e?: React.MouseEvent) => void
 }
 
-const Modal = ({ modalSwitch, modalClick }: IModalProps) => {
+const WarningModal = ({ modalSwitch, modalClick }: IModalProps) => {
+    
     return (
         <div onClick={modalClick} className="sign-out-modal" style={{ display: modalSwitch ? 'block' : 'none' }}>
             <div className="modal-content">
@@ -43,7 +45,7 @@ const Navbar = () => {
                     </p>
                 </div>
                 {userAdders && <button onClick={() => setModal(true)} className='nav-sign-in-btn' title="Disconnect your wallet"><SignOut /></button>}
-                <Modal modalClick={() => setModal(false)} modalSwitch={modal} />
+                <WarningModal modalClick={() => setModal(false)} modalSwitch={modal} />
             </div>
         </div>
     )

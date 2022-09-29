@@ -1,2 +1,2 @@
 export type {default as IUser} from './IUser'
-export type {default as ITokens} from './ITokens'
+export type {default as IToken} from './IToken'

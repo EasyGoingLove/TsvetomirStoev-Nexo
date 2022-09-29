@@ -4,6 +4,8 @@ import { ReactComponent as SignOut } from './sign-out.svg'
 import { ReactComponent as UserIcon } from './user.svg'
 import { ReactComponent as MetamaskIcon } from './metamask-icon.svg'
 import { ReactComponent as EthereumIcon } from './ethereum-icon.svg'
+import { ReactComponent as SmallNexoIcon } from './smalll-nexo-icon.svg'
+
 
 const svgIcons = {
     nexoIcon: NexoIcon,
@@ -12,6 +14,7 @@ const svgIcons = {
     userIcon: UserIcon,
     metamaskIcon:MetamaskIcon,
     ethereumIcon:EthereumIcon,
+    smallNexoIcon:SmallNexoIcon
 }
 
 export default svgIcons

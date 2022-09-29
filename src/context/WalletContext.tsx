@@ -1,5 +1,5 @@
 import React, { useState, createContext, FC } from "react"
-import { IUser } from '../interfaces'
+import { IUser , IToken } from '../interfaces'
 
 
 type Props = {
@@ -13,6 +13,13 @@ export const defaultUserValues: IUser = {
   nexoBalance: null
 }
 
+export const defaultTokenModalValues: IToken = {
+  tokenSymbol: null,
+  decimals: null,
+  totalSupply: null,
+  contractAddress: null
+}
+
 const WalletContext = createContext<any>(null);
 
 
@@ -20,12 +27,18 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
 
   const [userData, setUserData] = useState(defaultUserValues)
 
+  const [tokenModal, setTokenModal] = useState(defaultTokenModalValues)
+
   const updateUserData = (data: IUser) => {
     setUserData(data)
   }
 
+  const updatetokenModal = (data: IToken) => {
+    setTokenModal(data)
+  }
+  
   return (
-    <WalletContext.Provider value={{ userData, updateUserData }}>
+    <WalletContext.Provider value={{ userData, updateUserData ,tokenModal , updatetokenModal}}>
       {children}
     </WalletContext.Provider>
   )
