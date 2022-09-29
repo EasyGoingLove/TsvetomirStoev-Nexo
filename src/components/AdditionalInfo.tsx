@@ -18,7 +18,7 @@ const AdditionalInfo = () => {
     const { userData, updateUserData, updateTokenModal , updateLoader} = useContext(WalletContext)
     const [contractAddress, setContractAddress] = useState('');
     const [wrongAddress, setWrongAddress] = useState(false);
-    const [hover, setHover] = useState(false);
+    const [hover, setHover] = useState<number | null>();
 
     const handleChange = (e: any) => {
         setContractAddress(e.target.value);
@@ -27,11 +27,11 @@ const AdditionalInfo = () => {
         }
     };
 
-    const onHover = () => {
-        setHover(true)
+    const onHover = (id:number) => {
+        setHover(id)
     }
     const onLeave = () => {
-        setHover(false)
+        setHover(null)
     }
 
     const getToken = async () => {
@@ -67,12 +67,12 @@ const AdditionalInfo = () => {
         <div className="adt-info-card">
             <h2 className="add-info-header">More Tokens & Information</h2>
             <hr />
-            <h4 className="add-info-header">INPUT "Contract Address" OF TOKEN YOU WANT TO SEE</h4>
+            <h4 className="add-info-header">Input "Contract Address" of the token you want to add</h4>
             <input type="text" placeholder='Tokens Contract Address' className="address-input" onChange={handleChange} value={contractAddress} />
             {wrongAddress && <p style={{ color: 'red' }}>Wrong Address : Are you sure thats the correct address ?</p>}
             <div className='get-address-btn'><button onClick={getToken}>Get Token</button></div>
             <hr />
-            <h4 className="add-info-header">TOKENS WE FOUND IN YOUR WALLET & TOKENS YOU ADDED</h4>
+            <h4 className="add-info-header">Detected tokens in your wallet & tokens you added</h4>
             <table className='bonus-info-table'>
                 <tbody>
                     <tr>
@@ -82,11 +82,10 @@ const AdditionalInfo = () => {
                     {userData.listOfTokens?.map((token: ITokenList, i: number) => {
                         return (
                             <tr
-                                onMouseOver={onHover}
+                                onMouseOver={()=>onHover(i)}
                                 onMouseLeave={onLeave}
                                 style={{ 
-                                    background: hover ? 'green' : 'red',
-                                    transform: hover ? 'scale(1.1)' : 'none'
+                                    transform: hover === i ? 'scale(1.1)' : 'none'
                                 }}
                                 key={`${token.name}}-${i}`}
                                 onClick={() => { showTokenData(token.contractAddress) }}>

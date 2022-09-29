@@ -36,30 +36,38 @@ export const connect = async () => {
   }
 }
 
+export const getDetectedTokens = async(signer: ethers.Signer | ethers.providers.Provider | undefined, address:string)=>{
+  const listOfTokenBalances =  await Promise.all(tokensTodDetect.map((token) => { 
+    const balance  = getTokenBalance(token.address, signer, address)
+    return balance
+  })) 
+  const listOfNonZeroTokens = listOfTokenBalances
+  .reduce((arr:any,blc,i) => blc !== '0.0' ? 
+  [...arr,{
+    name:tokensTodDetect[i].name,
+    balance:blc,
+    contractAddress:tokensTodDetect[i].address
+  }] 
+  : arr, []) 
+  return listOfNonZeroTokens
+}
+
+export const getMainWalletData = async(provider:any) => {
+    const network = await provider.getNetwork();
+    const signer = await provider.getSigner();
+    const address = await signer.getAddress();
+    const ethBalance = ethers.utils.formatEther(await provider.getBalance(address))
+    const nexoBalance= await getTokenBalance(tokens[0].address, signer, address)
+
+    return [network , signer , address , ethBalance , nexoBalance]
+}
+
 export const getConnectionData = async () => {
   try {
     const [web3ModalProvider]: any = await connect()
+    const [network , signer , address , ethBalance , nexoBalance] = await getMainWalletData(web3ModalProvider)
+    const listOfNonZeroTokens = network.chainId === 1 ? await getDetectedTokens(signer,address) : []
 
-    const network = await web3ModalProvider.getNetwork();
-    const signer = await web3ModalProvider.getSigner();
-    const address = await signer.getAddress();
-    const ethBalance = ethers.utils.formatEther(await web3ModalProvider.getBalance(address))
-    const nexoBalance = network.chainId === 1 ? await getTokenBalance(tokens[0].address, signer, address) : '0'
-
-   
-    const listOfTokenBalances = network.chainId === 1 ?  await Promise.all(tokensTodDetect.map((token) => { 
-      const balance  = getTokenBalance(token.address, signer, address)
-      return balance
-    })) : []
-    const listOfNonZeroTokens = listOfTokenBalances.length !== 0 ? listOfTokenBalances
-    .reduce((arr:any,blc,i) => blc !== '0.0' ? 
-    [...arr,{
-      name:tokensTodDetect[i].name,
-      balance:blc,
-      contractAddress:tokensTodDetect[i].address
-    }] 
-    : arr, []) : []
- 
     return [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]
   } catch (error) {
     console.log('Unable to get connection data');
@@ -70,19 +78,16 @@ export const getConnectionData = async () => {
 export const getWalletnData = async () => {
   try {
     const web3ModalProvider = await new ethers.providers.Web3Provider(window.ethereum);
-
-    const network = await web3ModalProvider.getNetwork();
-    const signer = await web3ModalProvider.getSigner();
-    const address = await signer.getAddress();
-    const ethBalance = ethers.utils.formatEther(await web3ModalProvider.getBalance(address))
-    const nexoBalance= await getTokenBalance(tokens[0].address, signer, address)
+    const [network , signer , address , ethBalance , nexoBalance] = await getMainWalletData(web3ModalProvider)
+    const listOfNonZeroTokens = network.chainId === 1 ? await getDetectedTokens(signer,address) : []
 
     return {
       address: address,
       network: network.name === 'homestead' ? 'MAINNET' : network.name.toUpperCase(),
       ethereumBalance: ethBalance,
       nexoBalance: nexoBalance,
-      signer: signer
+      signer: signer,
+      listOfTokens:listOfNonZeroTokens
     }
 
   } catch (error) {

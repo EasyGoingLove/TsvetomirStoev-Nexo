@@ -45,6 +45,7 @@
         font: inherit;
         font-weight: bold;
         background-color: #00aae8;
+        color:white;
         width: 35%;
         border: none;
         padding: 0.5rem;
@@ -68,10 +69,15 @@
 .bonus-info-table{
     margin-left: 10%;
     margin-right: 10%;
+    tr:first-of-type {
+        color:white;
+        font-size: x-large;
+    }
     th{
         border: 1px solid #0a80ef;
         width: 20px;
         background-color: #00aae8;
         cursor: pointer;
+        border-radius: 10px;
     }
 }
