@@ -2,12 +2,13 @@ import { WalletContext, defaultUserValues } from '../context'
 import { useContext } from 'react'
 import LandingPage from './LandingPage'
 import UserPage from './UserPage'
+import { MainNetAlert } from '../components'
 
-import {getWalletnData} from '../helpers/walletFunction'
+import { getWalletnData } from '../helpers/walletFunction'
 
 const Display = () => {
 
-    const { userData, updateUserData } = useContext(WalletContext)
+    const { userData, updateUserData, updateMainnetAlert } = useContext(WalletContext)
     const userAdders = userData?.address
 
 
@@ -15,20 +16,24 @@ const Display = () => {
         if (!wallet.length) {
             updateUserData(defaultUserValues)
         } else {
-            const newWalletData :any = await getWalletnData();
-            
+            const newWalletData: any = await getWalletnData();
             updateUserData(newWalletData)
         }
     });
 
-    window.ethereum.on('networkChanged', function (network: any) {
-        console.log('net change', network);
-        if (network !== 1) {
-            alert('Please select MAINNET from your wallet netwwork')
+    window.ethereum.on('networkChanged', function (network: string) {
+        if (network !== '1') {
+           updateMainnetAlert(true)
+           updateUserData(defaultUserValues)
         }
     });
 
-    return (<>{userAdders ? <UserPage /> : <LandingPage />}</>)
+    return (
+        <>
+            <MainNetAlert />
+            {userAdders ? <UserPage /> : <LandingPage />}
+        </>
+    )
 }
 
 export default Display

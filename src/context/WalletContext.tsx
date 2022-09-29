@@ -1,5 +1,5 @@
 import React, { useState, createContext, FC } from "react"
-import { IUser , IToken } from '../interfaces'
+import { IUser, IToken } from '../interfaces'
 
 
 type Props = {
@@ -12,13 +12,14 @@ export const defaultUserValues: IUser = {
   ethereumBalance: null,
   nexoBalance: null,
   signer: null,
+  listOfTokens: []
 }
-export interface ITokenModal extends  IToken {
-   switchModal:boolean
+export interface ITokenModal extends IToken {
+  switchModal: boolean
 }
 
 export const defaultTokenModalValues: ITokenModal = {
-  switchModal:false,
+  switchModal: false,
   tokenSymbol: null,
   decimals: null,
   totalSupply: null,
@@ -33,6 +34,8 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
 
   const [tokenModal, setTokenModal] = useState(defaultTokenModalValues)
 
+  const [mainnetAlert, setMainnetAlert] = useState(false)
+
   const updateUserData = (data: IUser) => {
     setUserData(data)
   }
@@ -40,9 +43,20 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
   const updateTokenModal = (data: ITokenModal) => {
     setTokenModal(data)
   }
-  
+
+  const updateMainnetAlert = (setAlert: boolean) => {
+    setMainnetAlert(setAlert)
+  }
+
   return (
-    <WalletContext.Provider value={{ userData, updateUserData ,tokenModal , updateTokenModal}}>
+    <WalletContext.Provider value={{
+      userData,
+      updateUserData,
+      tokenModal,
+      updateTokenModal,
+      mainnetAlert,
+      updateMainnetAlert
+    }}>
       {children}
     </WalletContext.Provider>
   )

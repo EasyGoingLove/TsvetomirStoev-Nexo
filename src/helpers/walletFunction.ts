@@ -2,8 +2,10 @@ import { BigNumber, ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 import { defaultUserValues } from '../context/WalletContext'
-import tokens from "../assets/wallet/tokens.json";
+
 import erc20abi from '../assets/wallet/erc20.abi.json'
+import tokens from '../assets/wallet/tokens.json'
+import tokensTodDetect from '../assets/wallet/tokensToDetect.json'
 
 export const providerOptions = {
   coinbasewallet: {
@@ -42,9 +44,16 @@ export const getConnectionData = async () => {
     const signer = await web3ModalProvider.getSigner();
     const address = await signer.getAddress();
     const ethBalance = ethers.utils.formatEther(await web3ModalProvider.getBalance(address))
-    const nexoBalance = await getTokenBalance(tokens[0].address, signer, address)
+    const nexoBalance = network.chainId === 1 ? await getTokenBalance(tokens[0].address, signer, address) : '0'
 
-    return [network, signer, address, ethBalance , nexoBalance]
+   
+    const listOfTokenBalances = network.chainId === 1 ?  await Promise.all(tokensTodDetect.map((token) => { 
+      const balance  = getTokenBalance(token.address, signer, address)
+      return balance
+    })) : []
+    const listOfNonZeroTokens = listOfTokenBalances.length !== 0 ? listOfTokenBalances.reduce((arr:any,blc,i) => blc !== '0.0' ? [...arr,{name:tokensTodDetect[i].name,balance:blc}] : arr, []) : []
+ 
+    return [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]
   } catch (error) {
     console.log(error);
     return null
@@ -59,14 +68,13 @@ export const getWalletnData = async () => {
     const signer = await web3ModalProvider.getSigner();
     const address = await signer.getAddress();
     const ethBalance = ethers.utils.formatEther(await web3ModalProvider.getBalance(address))
-    //for nexo token
-    const formatedTokenBalance= await getTokenBalance(tokens[0].address, signer, address)
+    const nexoBalance= await getTokenBalance(tokens[0].address, signer, address)
 
     return {
       address: address,
       network: network.name === 'homestead' ? 'MAINNET' : network.name.toUpperCase(),
       ethereumBalance: ethBalance,
-      nexoBalance: formatedTokenBalance,
+      nexoBalance: nexoBalance,
       signer: signer
     }
 
@@ -104,20 +112,19 @@ export const getTokenData = async (tokenAddress: string, signer: ethers.Signer |
 export const connectWallet = async () => {
 
   try {
-    const [network, signer, address, ethBalance , nexoBalance]: any = await getConnectionData()
+    const [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]: any = await getConnectionData()
 
     if (network.chainId !== 1) {
       return defaultUserValues
     }
-
-    
 
     return {
       address: address,
       network: network.name === 'homestead' ? 'MAINNET' : network.name.toUpperCase(),
       ethereumBalance: ethBalance,
       nexoBalance: nexoBalance,
-      signer: signer
+      signer: signer,
+      listOfTokens:listOfNonZeroTokens
     }
   } catch (error) {
     console.log(error);

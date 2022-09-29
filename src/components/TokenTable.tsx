@@ -18,7 +18,8 @@ const TokenTable = () => {
     return (
         <div className="token-modal" onClick={()=> updateTokenModal(defaultTokenModalValues)}>
             <div className="token-modal-content">
-                <table id="customers">
+                <h3>{tokenModal.tokenSymbol} Information</h3>
+                <table className='token-talbe'>
                     <tbody>
                         <tr>
                             <th>Token Symbol</th>
@@ -34,7 +35,6 @@ const TokenTable = () => {
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     )

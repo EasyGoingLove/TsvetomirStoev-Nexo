@@ -6,7 +6,9 @@
     border-radius: 2rem;
     box-shadow: 0px 1rem 1.5rem rgba(0, 0, 0, 0.5); 
     width: 50%;
+    height: 600px;
     text-align: center;
+    overflow-y:auto;
 
     hr {
         border: 0;
@@ -60,5 +62,14 @@
             background-color: #00aae8;
             transform: scale(1);
         }
+    }
+}
+
+.bonus-info-table{
+    margin-left: 10%;
+    margin-right: 10%;
+    th{
+        border: 1px solid black;
+        width: 20px;
     }
 }

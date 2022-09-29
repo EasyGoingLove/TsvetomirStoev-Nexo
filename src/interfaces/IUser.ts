@@ -1,3 +1,5 @@
+import ITokenList from './ITokenList'
+
 interface IUser {
     address: string | null
     
@@ -9,6 +11,6 @@ interface IUser {
 
     nexoBalance: number | null
     
-    listOfTokens?:any
+    listOfTokens?: ITokenList[] | []
 }
 export default IUser
