@@ -6,7 +6,13 @@ $special-white : hsla(0,0%,100%,.8);
     background-color: $special-white;
     height: 64px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    display: flex;
 }
+
+.navbar-container{
+    margin-left: auto;
+}
+
 
 .nav-user-container {
     display: flex;

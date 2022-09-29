@@ -37,7 +37,7 @@ const Navbar = () => {
     return (
         <div className="nexo-navBar">
             <NexoLogo />
-            <div style={{ float: 'inline-end', display: 'flex' }}>
+            <div className='navbar-container'>
                 <div className='nav-user-container'>
                     <UserIcon />
                     <p className='nav-wallet-address'>
