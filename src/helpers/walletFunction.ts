@@ -31,7 +31,7 @@ export const connect = async () => {
 
     return [web3ModalProvider]
   } catch (error) {
-    console.log(error);
+    console.log('Connection Timeout');
     return null
   }
 }
@@ -51,11 +51,18 @@ export const getConnectionData = async () => {
       const balance  = getTokenBalance(token.address, signer, address)
       return balance
     })) : []
-    const listOfNonZeroTokens = listOfTokenBalances.length !== 0 ? listOfTokenBalances.reduce((arr:any,blc,i) => blc !== '0.0' ? [...arr,{name:tokensTodDetect[i].name,balance:blc}] : arr, []) : []
+    const listOfNonZeroTokens = listOfTokenBalances.length !== 0 ? listOfTokenBalances
+    .reduce((arr:any,blc,i) => blc !== '0.0' ? 
+    [...arr,{
+      name:tokensTodDetect[i].name,
+      balance:blc,
+      contractAddress:tokensTodDetect[i].address
+    }] 
+    : arr, []) : []
  
     return [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]
   } catch (error) {
-    console.log(error);
+    console.log('Unable to get connection data');
     return null
   }
 }
@@ -143,7 +150,8 @@ export const connectWallet = async () => {
       listOfTokens:listOfNonZeroTokens
     }
   } catch (error) {
-    console.log(error);
+    console.log('Failed to connect to wallet');  
+    return null
   }
 };
 

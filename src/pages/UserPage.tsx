@@ -12,10 +12,12 @@ const SmallNexoLogo = svgIcons.smallNexoIcon
 
 
 const UserPage = () => {
-    const { userData, updateTokenModal } = useContext(WalletContext)
+    const { userData, updateTokenModal , updateLoader} = useContext(WalletContext)
 
     const showTokenData = async (tokenAddress: string) => {
+        updateLoader(true)
         const [tokenSymbol, tokenDecimals, formatedTokenSupply]: any = await getTokenData(tokenAddress, userData.signer)
+        updateLoader(false)
         updateTokenModal({
             tokenSymbol: tokenSymbol,
             decimals: tokenDecimals,

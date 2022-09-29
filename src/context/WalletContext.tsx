@@ -36,6 +36,8 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
 
   const [mainnetAlert, setMainnetAlert] = useState(false)
 
+  const [loader, setLoader] = useState(false)
+
   const updateUserData = (data: IUser) => {
     setUserData(data)
   }
@@ -48,6 +50,10 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
     setMainnetAlert(setAlert)
   }
 
+  const updateLoader = (isLoader: boolean) => {
+    setLoader(isLoader)
+  }
+
   return (
     <WalletContext.Provider value={{
       userData,
@@ -55,7 +61,9 @@ export const WalletProvider: React.FC<Props> = ({ children }) => {
       tokenModal,
       updateTokenModal,
       mainnetAlert,
-      updateMainnetAlert
+      updateMainnetAlert,
+      loader,
+      updateLoader
     }}>
       {children}
     </WalletContext.Provider>

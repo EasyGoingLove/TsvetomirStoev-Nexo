@@ -5,13 +5,10 @@ import { useContext } from 'react'
 import {connectWallet} from '../helpers/walletFunction'
 
 const ConnectorBtn = () => {
-  const { updateUserData ,userData , updateMainnetAlert} = useContext(WalletContext)
+  const { updateUserData , updateLoader} = useContext(WalletContext)
 
   const connect = async() => {
     const initialWalletData = await connectWallet()
-    if(userData === initialWalletData){
-      updateMainnetAlert(true)
-    }
     updateUserData(initialWalletData) 
   }
  

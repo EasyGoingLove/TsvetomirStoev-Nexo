@@ -43,8 +43,9 @@ const Navbar = () => {
                     <p className='nav-wallet-address'>
                         {userAdders || 'Not connected to any wallet'}
                     </p>
+                    {userAdders && <button onClick={() => setModal(true)} className='nav-sign-in-btn' title="Disconnect your wallet"><SignOut /></button>}
                 </div>
-                {userAdders && <button onClick={() => setModal(true)} className='nav-sign-in-btn' title="Disconnect your wallet"><SignOut /></button>}
+               
                 <WarningModal modalClick={() => setModal(false)} modalSwitch={modal} />
             </div>
         </div>
