@@ -3,12 +3,13 @@ import { svgIcons } from '../assets/svgs'
 import { WalletContext } from '../context'
 import { useContext } from 'react'
 import { AdditionalInfo, TokenTable } from '../components'
-import { getTokenData } from '../helpers/walletFunction'
+import { getTokenData  } from '../helpers/walletFunction'
 import tokens from '../assets/wallet/tokens.json'
 
 const MetamaskIcon = svgIcons.metamaskIcon
 const EthereumIcon = svgIcons.ethereumIcon
 const SmallNexoLogo = svgIcons.smallNexoIcon
+const CoinbaseIcon = svgIcons.coinbaseIcon
 
 
 const UserPage = () => {
@@ -34,11 +35,11 @@ const UserPage = () => {
         })
     }
 
-
+    
     return (
         <div className="userPage-wrapper">
             <div className="card">
-                <div className="wallet-logo"><MetamaskIcon /></div>
+                <div className="wallet-logo">{userData.isMetamask ? <MetamaskIcon /> : <CoinbaseIcon/>}</div>
                 <div className="padding"></div>
                 <h3 className="user-address">{userData?.address}</h3>
                 <div className="title">{userData?.network}</div>

@@ -12,5 +12,7 @@ interface IUser {
     nexoBalance: number | null
     
     listOfTokens?: ITokenList[] | []
+
+    isMetamask : boolean | null
 }
 export default IUser

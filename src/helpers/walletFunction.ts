@@ -56,19 +56,22 @@ export const getMainWalletData = async(provider:any) => {
     const network = await provider.getNetwork();
     const signer = await provider.getSigner();
     const address = await signer.getAddress();
+    const isMetamask =   await provider.connection.url === "metamask" 
     const ethBalance = ethers.utils.formatEther(await provider.getBalance(address))
     const nexoBalance= await getTokenBalance(tokens[0].address, signer, address)
-
-    return [network , signer , address , ethBalance , nexoBalance]
+   
+    return [network , signer , address , ethBalance , nexoBalance , isMetamask]
 }
+
+
 
 export const getConnectionData = async () => {
   try {
     const [web3ModalProvider]: any = await connect()
-    const [network , signer , address , ethBalance , nexoBalance] = await getMainWalletData(web3ModalProvider)
+    const [network , signer , address , ethBalance , nexoBalance , isMetamask] = await getMainWalletData(web3ModalProvider)
     const listOfNonZeroTokens = network.chainId === 1 ? await getDetectedTokens(signer,address) : []
 
-    return [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]
+    return [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens , isMetamask]
   } catch (error) {
     console.log('Unable to get connection data');
     return null
@@ -78,7 +81,7 @@ export const getConnectionData = async () => {
 export const getWalletnData = async () => {
   try {
     const web3ModalProvider = await new ethers.providers.Web3Provider(window.ethereum);
-    const [network , signer , address , ethBalance , nexoBalance] = await getMainWalletData(web3ModalProvider)
+    const [network , signer , address , ethBalance , nexoBalance , isMetamask] = await getMainWalletData(web3ModalProvider)
     const listOfNonZeroTokens = network.chainId === 1 ? await getDetectedTokens(signer,address) : []
 
     return {
@@ -87,7 +90,8 @@ export const getWalletnData = async () => {
       ethereumBalance: ethBalance,
       nexoBalance: nexoBalance,
       signer: signer,
-      listOfTokens:listOfNonZeroTokens
+      listOfTokens:listOfNonZeroTokens,
+      isMetamask:isMetamask
     }
 
   } catch (error) {
@@ -140,7 +144,7 @@ export const getTokenData = async (tokenAddress: string, signer: ethers.Signer |
 export const connectWallet = async () => {
 
   try {
-    const [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens]: any = await getConnectionData()
+    const [network, signer, address, ethBalance , nexoBalance , listOfNonZeroTokens ,isMetamask]: any = await getConnectionData()
 
     if (network.chainId !== 1) {
       return defaultUserValues
@@ -152,7 +156,8 @@ export const connectWallet = async () => {
       ethereumBalance: ethBalance,
       nexoBalance: nexoBalance,
       signer: signer,
-      listOfTokens:listOfNonZeroTokens
+      listOfTokens:listOfNonZeroTokens,
+      isMetamask:isMetamask
     }
   } catch (error) {
     console.log('Failed to connect to wallet');  

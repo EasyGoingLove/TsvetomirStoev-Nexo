@@ -12,7 +12,8 @@ export const defaultUserValues: IUser = {
   ethereumBalance: null,
   nexoBalance: null,
   signer: null,
-  listOfTokens: []
+  listOfTokens: [],
+  isMetamask:null
 }
 export interface ITokenModal extends IToken {
   switchModal: boolean
