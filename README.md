@@ -1,5 +1,20 @@
 # Dapp Information
 
+## Tech Stack
+<ul >
+  <li>React</li>
+  <li>Sass</li>
+  <li>Ether.js</li>
+  <li>WebPack & Babel</li>
+  <li>Web3Modal.js</li>
+</ul>
+
+## Demo
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.17.51.gif" width="600" height="350"/>
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.19.18.gif" width="600" height="350"/>
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.34.20.gif" width="600" height="350"/>
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.37.52.gif" width="600" height="350"/>
+
 
 # Getting Started with Create React App
 
