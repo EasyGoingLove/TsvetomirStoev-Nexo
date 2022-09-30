@@ -1,18 +1,19 @@
 # Dapp Information
 
 ## Tech Stack
-
-• React
-• Sass
-• Ether.js
-• Web3Modal.js
-• WebPack & Babel
+<ul >
+  <li>React</li>
+  <li>Sass</li>
+  <li>Ether.js</li>
+  <li>WebPack & Babel</li>
+  <li>Web3Modal.js</li>
+</ul>
 
 ## Demo
 **Supports Metamask and Coinbase Wallets
 
-<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.17.51.gif" width="250" height="250"/>
-<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.19.18.gif" width="250" height="250"/>
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.17.51.gif" width="500" height="250"/>
+<img src="https://s4.gifyu.com/images/Recording-2022-09-30-at-04.19.18.gif" width="500" height="250"/>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
