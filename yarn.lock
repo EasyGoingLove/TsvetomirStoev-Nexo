@@ -4294,11 +4294,6 @@ cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cra-template-typescript@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/cra-template-typescript/-/cra-template-typescript-1.2.0.tgz#caa8472b6c63d4fdbfcd5dfcac8788751153f278"
-  integrity sha512-GmkiMCJYLPCUuu3lonHVKs4KpDMmNu+24usHqHDaK/U9DhZxT9DRmz7lP31aRa0JI57bmbIJs+0DWnoxH+CUqg==
-
 create-hash@^1.1.0, create-hash@^1.1.2, create-hash@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/create-hash/-/create-hash-1.2.0.tgz#889078af11a63756bcfb59bd221996be3a9ef196"
